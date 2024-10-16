@@ -13,7 +13,7 @@ function App() {
   const [, setCities] = useState([]);
   const [activeTab, setActiveTab] = useState('current');
   const [theme, setTheme] = useState('light');
-  const [, setAstronomy] = useState(null);
+  const [astronomy, setAstronomy] = useState(null);
 
   const apiKey = "74072ad194774534b56234435241510";
   const defaultCity = 'New York';
@@ -83,6 +83,21 @@ function App() {
     setSuggestions([]);
   };
 
+  const detectLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          fetchWeather(`${latitude},${longitude}`);
+        },
+        () => {
+          setError("Unable to retrieve your location");
+        }
+      );
+    } else {
+      setError("Geolocation is not supported by your browser");
+    }
+  };
 
   const toggleTheme = () => {
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');

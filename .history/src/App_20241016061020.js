@@ -13,7 +13,7 @@ function App() {
   const [, setCities] = useState([]);
   const [activeTab, setActiveTab] = useState('current');
   const [theme, setTheme] = useState('light');
-  const [, setAstronomy] = useState(null);
+  const [astronomy, setAstronomy] = useState(null);
 
   const apiKey = "74072ad194774534b56234435241510";
   const defaultCity = 'New York';
