@@ -1,0 +1,219 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+.header {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #3498db;
+  margin-bottom: 15px;
+}
+
+.search-location {
+  display: flex;
+  gap: 10px;
+}
+
+.search-bar {
+  flex-grow: 1;
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: 1px solid #e0e0e0;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+button {
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Dropdown suggestions */
+.suggestions {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  width: 300px;
+  z-index: 1000;
+  top: 60px; /* Align below the search bar */
+  left: 20%; /* Adjust the position so it's aligned with the search bar */
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* Weather content */
+.weather-content {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.current-weather {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f5f7fa;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+}
+
+.weather-icon {
+  width: 64px;
+  height: 64px;
+  margin-right: 15px;
+}
+
+.temperature {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #3498db;
+}
+
+.weather-details {
+  text-align: right;
+}
+
+.weather-details p {
+  margin: 5px 0;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.weather-location {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.weather-location h2 {
+  font-size: 2rem;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.weather-location p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Hourly and daily forecasts */
+.hourly-scroll, .forecast-list {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.hour-item, .forecast-item {
+  flex: 0 0 auto;
+  text-align: center;
+  background-color: #f5f7fa;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.forecast-item:hover, .hour-item:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+
+.forecast-item img {
+  width: 32px;
+  height: 32px;
+}
+
+.saved-cities {
+  margin-top: 20px;
+}
+
+.saved-cities-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.saved-city-item button {
+  background-color: #f5f7fa;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.remove-city-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+  .current-weather {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .weather-details {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .weather-location {
+    margin-top: 10px;
+  }
+}

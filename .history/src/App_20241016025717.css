@@ -1,0 +1,155 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+.header {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #3498db;
+  margin-bottom: 15px;
+}
+
+.search-location {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.search-bar {
+  flex-grow: 1;
+  padding: 12px;
+  border-radius: 25px;
+  border: 1px solid #e0e0e0;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Weather Sections */
+.current-weather,
+.hourly-weather,
+.daily-forecast {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.weather-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.weather-main {
+  text-align: center;
+}
+
+.temperature {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.condition {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+}
+
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hourly-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.hour-item {
+  flex: 0 0 auto;
+  padding: 15px;
+  background-color: #f0f4f8;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 100px;
+}
+
+.forecast-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.forecast-item {
+  background-color: #f0f4f8;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.saved-cities {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  color: #333;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

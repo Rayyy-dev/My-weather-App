@@ -1,0 +1,265 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #3498db;
+  margin-bottom: 15px;
+}
+
+.search-location {
+  display: flex;
+  gap: 10px;
+}
+
+.search-bar {
+  flex-grow: 1;
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: 1px solid #e0e0e0;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+button {
+  background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+.weather-content {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.weather-tabs {
+  display: flex;
+  background-color: #f5f7fa;
+  padding: 10px;
+}
+
+.weather-tabs button {
+  background-color: transparent;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.weather-tabs button.active {
+  background-color: #3498db;
+  color: #ffffff;
+  border-radius: 30px;
+}
+
+.current-weather,
+.hourly-weather,
+.daily-forecast {
+  padding: 30px;
+}
+
+.weather-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.weather-main {
+  text-align: center;
+}
+
+.temperature {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #3498db;
+}
+
+.condition {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hourly-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 10px 0;
+  scrollbar-width: thin;
+  scrollbar-color: #3498db #f5f7fa;
+}
+
+.hour-item {
+  flex: 0 0 auto;
+  padding: 15px;
+  background-color: #f5f7fa;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 100px;
+  transition: transform 0.3s ease;
+}
+
+.hour-item:hover {
+  transform: translateY(-5px);
+}
+
+.forecast-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.forecast-item {
+  background-color: #f5f7fa;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.forecast-item:hover {
+  transform: translateY(-5px);
+}
+
+.saved-cities {
+  margin-top: 20px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.saved-cities-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.saved-city-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.remove-city-btn {
+  background-color: #e74c3c;
+  color: white;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .weather-details {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .weather-info {
+    margin-top: 20px;
+  }
+
+  .forecast-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Add these new styles */
+.weather-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.tab-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  background-color: #f0f2f5;
+  border: none;
+  border-radius: 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tab.active {
+  background-color: #1e88e5;
+  color: white;
+}
+
+.toggle-saved-cities {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #1e88e5;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-saved-cities:hover {
+  background-color: #1565c0;
+}

@@ -1,0 +1,216 @@
+:root {
+  --primary-bg: #f5f5f5;
+  --card-bg: #ffffff;
+  --primary-text: #333333;
+  --secondary-text: #666666;
+  --accent: #3498db;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+  margin: 0;
+  padding: 0;
+}
+
+.weather-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.search-container {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+}
+
+.search-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.weather-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.weather-card {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.current-weather h2, .forecast h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.temperature {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.weather-details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.tab {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #f0f0f0;
+  border: none;
+  cursor: pointer;
+}
+
+.tab.active {
+  background-color: #333;
+  color: white;
+}
+
+.hourly-forecast, .tenday-forecast {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.hourly-item, .forecast-item {
+  min-width: 100px;
+  text-align: center;
+}
+
+.theme-toggle {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dark {
+  background-color: #333;
+  color: white;
+}
+
+.dark .weather-card, .dark .hourly-forecast, .dark .tenday-forecast {
+  background-color: #444;
+  color: white;
+}
+
+.dark .tab {
+  background-color: #555;
+  color: white;
+}
+
+.dark .tab.active {
+  background-color: #777;
+}
+
+.hourly-forecast {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-top: 1rem;
+}
+
+.hourly-item {
+  min-width: 100px;
+  text-align: center;
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.astronomy-forecast {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  box-shadow: var(--card-shadow);
+  margin-top: 1rem;
+}
+
+.astronomy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.astronomy-item {
+  background-color: var(--primary-bg);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.astronomy-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.astronomy-icon {
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.astronomy-item p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+/* Dark theme adjustments */
+.dark .astronomy-item {
+  background-color: var(--card-bg);
+}

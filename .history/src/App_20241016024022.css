@@ -1,0 +1,162 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f6f9;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 1.5rem;
+}
+
+.search-location {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adds spacing between input and buttons */
+}
+
+.search-bar {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 300px; /* Adjusted width to be balanced */
+  font-size: 1rem;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Suggestions dropdown */
+.suggestions {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  width: 300px; /* Match the width of the search bar */
+  z-index: 1000;
+  top: 60px; /* Position it below the search bar */
+  left: 20%; /* Adjust position so it aligns with the search bar */
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+}
+
+
+/* Saved Cities */
+.saved-cities {
+  margin: 20px 0;
+}
+
+.saved-cities button {
+  background-color: #28a745;
+  margin: 0 5px;
+  color: white;
+}
+
+.saved-cities button:hover {
+  background-color: #218838;
+}
+
+/* Main Sections */
+main {
+  margin-top: 20px;
+}
+
+.current-weather,
+.hourly-weather,
+.daily-forecast {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.weather-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hourly-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+}
+
+.hour-item {
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.forecast-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.forecast-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.error {
+  color: red;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+}

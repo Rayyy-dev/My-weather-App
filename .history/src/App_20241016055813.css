@@ -1,0 +1,43 @@
+:root {
+  --primary-bg: #f5f5f5;
+  --card-bg: #ffffff;
+  --primary-text: #333333;
+  --secondary-text: #666666;
+  --accent: #007aff;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+  margin: 0;
+  padding: 0;
+}
+
+.weather-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.search-container {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+}
+
+.search-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+}

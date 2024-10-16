@@ -1,0 +1,112 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Set body font and background */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #e6e6e6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.weather-page-container {
+  background: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Search Form */
+.search-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-form input {
+  padding: 10px;
+  width: 70%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+.search-form button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.search-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Current Location Button */
+.location-button {
+  margin-bottom: 20px;
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.location-button:hover {
+  background-color: #218838;
+}
+
+/* Current Weather Display */
+.current-weather {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Forecast Container */
+.forecast-container {
+  margin-top: 20px;
+}
+
+.forecast {
+  display: flex;
+  justify-content: space-around;
+}
+
+.forecast-day {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100px;
+}
+
+.forecast-day p {
+  margin-bottom: 5px;
+}
+
+/* Error Message */
+.error {
+  color: red;
+  font-size: 1.1rem;
+  margin-top: 20px;
+}
