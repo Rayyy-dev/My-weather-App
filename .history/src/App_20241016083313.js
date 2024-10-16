@@ -94,17 +94,16 @@ function App() {
     <div className={`app-container ${theme}`}>
       <header className="header">
         <div className="logo-container">
-          <h1 className="logo">WeatherNow</h1>
-          <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
+          <h1 className="logo">Weather App</h1>
+          <button onClick={toggleTheme} className="theme-toggle">
             <FontAwesomeIcon icon={theme === 'light' ? faMoon : faSun} />
           </button>
         </div>
         <div className="search-container">
           <div className="search-input-wrapper">
-            <FontAwesomeIcon icon={faSearch} className="search-icon" />
             <input
               type="text"
-              placeholder="Search location..."
+              placeholder="Search for a city or country"
               value={city}
               onChange={handleInputChange}
               className="search-input"
@@ -118,43 +117,46 @@ function App() {
                     onClick={() => handleSearch(suggestion.name)}
                   >
                     <FontAwesomeIcon icon={faMapMarkerAlt} className="suggestion-icon" />
-                    <span>{suggestion.name}, {suggestion.country}</span>
+                    <span>{suggestion.name}, {suggestion.region}, {suggestion.country}</span>
                   </div>
                 ))}
               </div>
             )}
           </div>
+          <button onClick={() => handleSearch(city)} className="search-button">
+            <FontAwesomeIcon icon={faSearch} />
+          </button>
         </div>
       </header>
 
       <main className="main-content">
-        {loading && <div className="loading">Loading<span>.</span><span>.</span><span>.</span></div>}
+        {loading && <div className="loading">Loading...</div>}
         {error && <div className="error">{error}</div>}
 
         {weather && (
           <div className="weather-grid">
             <div className="weather-card current-weather">
               <h2>Current Weather</h2>
-              <p className="location">{weather.location.name}, {weather.location.country}</p>
+              <p>{weather.location.name}, {weather.location.country}</p>
               <div className="weather-main">
                 <div className="temperature-container">
-                  <div className="temperature">{Math.round(weather.current.temp_c)}°</div>
+                  <div className="temperature">{Math.round(weather.current.temp_c)}°C</div>
                   <div className="condition">{weather.current.condition.text}</div>
+                  <div className="feels-like">Feels like {Math.round(weather.current.feelslike_c)}°C</div>
                 </div>
-                <div className="feels-like">Feels like {Math.round(weather.current.feelslike_c)}°</div>
               </div>
               <div className="weather-details">
                 <div className="detail-item">
                   <FontAwesomeIcon icon={faTint} className="detail-icon" />
-                  <p>{weather.current.humidity}%</p>
+                  <p>Humidity: {weather.current.humidity}%</p>
                 </div>
                 <div className="detail-item">
                   <FontAwesomeIcon icon={faWind} className="detail-icon" />
-                  <p>{Math.round(weather.current.wind_kph)} km/h</p>
+                  <p>Wind: {Math.round(weather.current.wind_kph)} km/h</p>
                 </div>
                 <div className="detail-item">
                   <FontAwesomeIcon icon={faThermometerHalf} className="detail-icon" />
-                  <p>{weather.current.pressure_mb} hPa</p>
+                  <p>Pressure: {weather.current.pressure_mb} hPa</p>
                 </div>
               </div>
             </div>
@@ -165,8 +167,8 @@ function App() {
                 {forecast.slice(0, 3).map((day, index) => (
                   <div key={index} className="forecast-item">
                     <div className="forecast-day">{new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' })}</div>
+                    <div className="forecast-temp">{Math.round(day.day.avgtemp_c)}°C</div>
                     <img src={day.day.condition.icon} alt="Weather icon" className="forecast-icon" />
-                    <div className="forecast-temp">{Math.round(day.day.avgtemp_c)}°</div>
                     <div className="forecast-condition">{day.day.condition.text}</div>
                   </div>
                 ))}
@@ -183,7 +185,7 @@ function App() {
                 <div key={index} className="hourly-item">
                   <div className="hourly-time">{new Date(hour.time).getHours()}:00</div>
                   <img src={hour.condition.icon} alt="Weather icon" className="hourly-icon" />
-                  <div className="hourly-temp">{Math.round(hour.temp_c)}°</div>
+                  <div className="hourly-temp">{Math.round(hour.temp_c)}°C</div>
                 </div>
               ))}
             </div>
@@ -196,12 +198,13 @@ function App() {
             <div className="tenday-grid">
               {forecast.map((day, index) => (
                 <div key={index} className="tenday-item">
-                  <div className="tenday-day">{new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' })}</div>
+                  <div className="tenday-day">{new Date(day.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</div>
                   <img src={day.day.condition.icon} alt="Weather icon" className="tenday-icon" />
                   <div className="tenday-temps">
                     <span className="max-temp">{Math.round(day.day.maxtemp_c)}°</span>
                     <span className="min-temp">{Math.round(day.day.mintemp_c)}°</span>
                   </div>
+                  <div className="tenday-condition">{day.day.condition.text}</div>
                 </div>
               ))}
             </div>
@@ -210,7 +213,7 @@ function App() {
       </main>
 
       <footer className="footer">
-        <p>&copy; 2024 WeatherNow. All rights reserved.</p>
+        <p>&copy; 2023 Weather App. All rights reserved.</p>
       </footer>
     </div>
   );

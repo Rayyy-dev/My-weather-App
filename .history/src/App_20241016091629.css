@@ -288,19 +288,19 @@ body {
 
 .tenday-item {
   display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
+  grid-template-columns: 1fr 40px 3fr 1fr;
   align-items: center;
-  padding: 0.75rem;
-  border-radius: var(--border-radius);
-  transition: background-color 0.3s ease;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--accent-light);
 }
 
-.tenday-item:hover {
-  background-color: var(--accent-light);
+.tenday-item:last-child {
+  border-bottom: none;
 }
 
 .tenday-day {
   font-weight: 600;
+  color: var(--primary-text);
 }
 
 .tenday-icon {
@@ -309,9 +309,44 @@ body {
   justify-self: center;
 }
 
-.tenday-temps {
+.tenday-temp-range {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+
+.temp-bar {
+  height: 4px;
+  background-color: var(--accent-light);
+  flex-grow: 1;
+  border-radius: 2px;
+  position: relative;
+}
+
+.temp-bar::before,
+.temp-bar::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.temp-bar::before {
+  left: 0;
+}
+
+.temp-bar::after {
+  right: 0;
+}
+
+.min-temp {
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .max-temp {
@@ -319,9 +354,10 @@ body {
   font-weight: 600;
 }
 
-.min-temp {
+.precipitation {
   color: var(--accent);
-  font-weight: 600;
+  font-size: 0.9rem;
+  justify-self: end;
 }
 
 .loading {

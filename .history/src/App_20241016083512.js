@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faMapMarkerAlt, faTint, faWind, faThermometerHalf, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faMapMarkerAlt, faTint, faWind, faThermometerHalf, faSun, faMoon, faCloud, faCloudRain, faSnowflake } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [city, setCity] = useState('');
@@ -139,7 +139,10 @@ function App() {
               <div className="weather-main">
                 <div className="temperature-container">
                   <div className="temperature">{Math.round(weather.current.temp_c)}°</div>
-                  <div className="condition">{weather.current.condition.text}</div>
+                  <div className="condition">
+                    <FontAwesomeIcon icon={getWeatherIcon(weather.current.condition.text)} className="condition-icon" />
+                    {weather.current.condition.text}
+                  </div>
                 </div>
                 <div className="feels-like">Feels like {Math.round(weather.current.feelslike_c)}°</div>
               </div>
@@ -165,7 +168,7 @@ function App() {
                 {forecast.slice(0, 3).map((day, index) => (
                   <div key={index} className="forecast-item">
                     <div className="forecast-day">{new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' })}</div>
-                    <img src={day.day.condition.icon} alt="Weather icon" className="forecast-icon" />
+                    <FontAwesomeIcon icon={getWeatherIcon(day.day.condition.text)} className="forecast-icon" />
                     <div className="forecast-temp">{Math.round(day.day.avgtemp_c)}°</div>
                     <div className="forecast-condition">{day.day.condition.text}</div>
                   </div>
@@ -182,7 +185,7 @@ function App() {
               {forecast[0].hour.map((hour, index) => (
                 <div key={index} className="hourly-item">
                   <div className="hourly-time">{new Date(hour.time).getHours()}:00</div>
-                  <img src={hour.condition.icon} alt="Weather icon" className="hourly-icon" />
+                  <FontAwesomeIcon icon={getWeatherIcon(hour.condition.text)} className="hourly-icon" />
                   <div className="hourly-temp">{Math.round(hour.temp_c)}°</div>
                 </div>
               ))}
@@ -197,7 +200,7 @@ function App() {
               {forecast.map((day, index) => (
                 <div key={index} className="tenday-item">
                   <div className="tenday-day">{new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' })}</div>
-                  <img src={day.day.condition.icon} alt="Weather icon" className="tenday-icon" />
+                  <FontAwesomeIcon icon={getWeatherIcon(day.day.condition.text)} className="tenday-icon" />
                   <div className="tenday-temps">
                     <span className="max-temp">{Math.round(day.day.maxtemp_c)}°</span>
                     <span className="min-temp">{Math.round(day.day.mintemp_c)}°</span>
@@ -214,6 +217,15 @@ function App() {
       </footer>
     </div>
   );
+}
+
+function getWeatherIcon(condition) {
+  condition = condition.toLowerCase();
+  if (condition.includes('sun') || condition.includes('clear')) return faSun;
+  if (condition.includes('cloud')) return faCloud;
+  if (condition.includes('rain')) return faCloudRain;
+  if (condition.includes('snow')) return faSnowflake;
+  return faCloud; // default icon
 }
 
 export default App;

@@ -9,7 +9,7 @@
   --warning: #ffb74d;
   --danger: #e57373;
   --border-radius: 10px;
-  --transition: all 0.3s ease;
+  --transition: all 0.2s ease;
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -26,7 +26,7 @@ body {
   background-color: var(--primary-bg);
   color: var(--primary-text);
   line-height: 1.6;
-  transition: var(--transition);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .app-container {
@@ -83,6 +83,7 @@ body {
   top: 50%;
   transform: translateY(-50%);
   color: var(--secondary-text);
+  transition: var(--transition);
 }
 
 .search-input {
@@ -102,6 +103,10 @@ body {
   box-shadow: 0 0 0 3px var(--accent-light);
 }
 
+.search-input:focus + .search-icon {
+  color: var(--accent);
+}
+
 .suggestions {
   position: absolute;
   top: 100%;
@@ -113,6 +118,14 @@ body {
   border-radius: 0 0 var(--border-radius) var(--border-radius);
   box-shadow: var(--shadow);
   z-index: 10;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.suggestions.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .suggestion-item {
@@ -128,8 +141,8 @@ body {
 .weather-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .weather-card {
@@ -137,6 +150,12 @@ body {
   border-radius: var(--border-radius);
   padding: 1.5rem;
   box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.weather-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .weather-card h2 {
@@ -203,13 +222,6 @@ body {
 
 .forecast-item {
   text-align: center;
-  padding: 1rem;
-  border-radius: var(--border-radius);
-  transition: background-color 0.3s ease;
-}
-
-.forecast-item:hover {
-  background-color: var(--accent-light);
 }
 
 .forecast-day {
@@ -221,11 +233,6 @@ body {
   width: 50px;
   height: 50px;
   margin: 0.5rem auto;
-  transition: transform 0.3s ease;
-}
-
-.forecast-item:hover .forecast-icon {
-  transform: scale(1.1);
 }
 
 .forecast-temp {
@@ -290,13 +297,12 @@ body {
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
   align-items: center;
-  padding: 0.75rem;
-  border-radius: var(--border-radius);
-  transition: background-color 0.3s ease;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--accent-light);
 }
 
-.tenday-item:hover {
-  background-color: var(--accent-light);
+.tenday-item:last-child {
+  border-bottom: none;
 }
 
 .tenday-day {
@@ -331,22 +337,12 @@ body {
 }
 
 .loading span {
-  animation: dots 1.4s infinite;
-  opacity: 0;
+  animation: pulse 1.4s infinite;
+  opacity: 0.5;
 }
 
-.loading span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.loading span:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes dots {
-  0% { opacity: 0; }
+@keyframes pulse {
   50% { opacity: 1; }
-  100% { opacity: 0; }
 }
 
 .error {

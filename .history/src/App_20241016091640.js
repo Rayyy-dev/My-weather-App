@@ -198,10 +198,14 @@ function App() {
                 <div key={index} className="tenday-item">
                   <div className="tenday-day">{new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' })}</div>
                   <img src={day.day.condition.icon} alt="Weather icon" className="tenday-icon" />
-                  <div className="tenday-temps">
-                    <span className="max-temp">{Math.round(day.day.maxtemp_c)}°</span>
+                  <div className="tenday-temp-range">
                     <span className="min-temp">{Math.round(day.day.mintemp_c)}°</span>
+                    <div className="temp-bar"></div>
+                    <span className="max-temp">{Math.round(day.day.maxtemp_c)}°</span>
                   </div>
+                  {day.day.daily_chance_of_rain > 0 && (
+                    <div className="precipitation">{day.day.daily_chance_of_rain}%</div>
+                  )}
                 </div>
               ))}
             </div>

@@ -133,32 +133,7 @@ function App() {
 
         {weather && (
           <div className="weather-grid">
-            <div className="weather-card current-weather">
-              <h2>Current Weather</h2>
-              <p className="location">{weather.location.name}, {weather.location.country}</p>
-              <div className="weather-main">
-                <div className="temperature-container">
-                  <div className="temperature">{Math.round(weather.current.temp_c)}°</div>
-                  <div className="condition">{weather.current.condition.text}</div>
-                </div>
-                <div className="feels-like">Feels like {Math.round(weather.current.feelslike_c)}°</div>
-              </div>
-              <div className="weather-details">
-                <div className="detail-item">
-                  <FontAwesomeIcon icon={faTint} className="detail-icon" />
-                  <p>{weather.current.humidity}%</p>
-                </div>
-                <div className="detail-item">
-                  <FontAwesomeIcon icon={faWind} className="detail-icon" />
-                  <p>{Math.round(weather.current.wind_kph)} km/h</p>
-                </div>
-                <div className="detail-item">
-                  <FontAwesomeIcon icon={faThermometerHalf} className="detail-icon" />
-                  <p>{weather.current.pressure_mb} hPa</p>
-                </div>
-              </div>
-            </div>
-
+            <CurrentWeather weather={weather} />
             <div className="weather-card forecast">
               <h2>3-Day Forecast</h2>
               <div className="forecast-grid">

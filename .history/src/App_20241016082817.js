@@ -11,6 +11,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [, setCities] = useState([]);
+  const [activeTab, setActiveTab] = useState('current');
   const [theme, setTheme] = useState('light');
   const [, setAstronomy] = useState(null);
 
@@ -82,6 +83,7 @@ function App() {
     setSuggestions([]);
   };
 
+
   const toggleTheme = () => {
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
   };
@@ -91,70 +93,64 @@ function App() {
   }, [theme]);
 
   return (
-    <div className={`app-container ${theme}`}>
-      <header className="header">
-        <div className="logo-container">
-          <h1 className="logo">WeatherNow</h1>
-          <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
-            <FontAwesomeIcon icon={theme === 'light' ? faMoon : faSun} />
-          </button>
+    <div className={`weather-dashboard ${theme}`}>
+      <div className="search-container">
+        <div className="search-input-wrapper">
+          <input
+            type="text"
+            placeholder="Search for a city or country"
+            value={city}
+            onChange={handleInputChange}
+            className="search-input"
+          />
+          {suggestions.length > 0 && (
+            <div className="suggestions">
+              {suggestions.map((suggestion, index) => (
+                <div
+                  key={index}
+                  className="suggestion-item"
+                  onClick={() => handleSearch(suggestion.name)}
+                >
+                  <FontAwesomeIcon icon={faMapMarkerAlt} className="suggestion-icon" />
+                  <span>{suggestion.name}, {suggestion.region}, {suggestion.country}</span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-        <div className="search-container">
-          <div className="search-input-wrapper">
-            <FontAwesomeIcon icon={faSearch} className="search-icon" />
-            <input
-              type="text"
-              placeholder="Search location..."
-              value={city}
-              onChange={handleInputChange}
-              className="search-input"
-            />
-            {suggestions.length > 0 && (
-              <div className="suggestions">
-                {suggestions.map((suggestion, index) => (
-                  <div
-                    key={index}
-                    className="suggestion-item"
-                    onClick={() => handleSearch(suggestion.name)}
-                  >
-                    <FontAwesomeIcon icon={faMapMarkerAlt} className="suggestion-icon" />
-                    <span>{suggestion.name}, {suggestion.country}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </header>
+        <button onClick={() => handleSearch(city)} className="search-button">
+          <FontAwesomeIcon icon={faSearch} />
+        </button>
+      </div>
 
-      <main className="main-content">
-        {loading && <div className="loading">Loading<span>.</span><span>.</span><span>.</span></div>}
-        {error && <div className="error">{error}</div>}
+      {loading && <div className="loading">Loading...</div>}
+      {error && <div className="error">{error}</div>}
 
-        {weather && (
+      {weather && forecast.length > 0 && (
+        <>
           <div className="weather-grid">
             <div className="weather-card current-weather">
               <h2>Current Weather</h2>
-              <p className="location">{weather.location.name}, {weather.location.country}</p>
+              <p>{weather.location.name}, {weather.location.country}</p>
               <div className="weather-main">
                 <div className="temperature-container">
-                  <div className="temperature">{Math.round(weather.current.temp_c)}°</div>
+                  <div className="temperature">{Math.round(weather.current.temp_c)}°C</div>
                   <div className="condition">{weather.current.condition.text}</div>
+                  <div className="feels-like">Feels like {Math.round(weather.current.feelslike_c)}°C</div>
                 </div>
-                <div className="feels-like">Feels like {Math.round(weather.current.feelslike_c)}°</div>
               </div>
               <div className="weather-details">
                 <div className="detail-item">
                   <FontAwesomeIcon icon={faTint} className="detail-icon" />
-                  <p>{weather.current.humidity}%</p>
+                  <p>Humidity: {weather.current.humidity}%</p>
                 </div>
                 <div className="detail-item">
                   <FontAwesomeIcon icon={faWind} className="detail-icon" />
-                  <p>{Math.round(weather.current.wind_kph)} km/h</p>
+                  <p>Wind: {Math.round(weather.current.wind_kph)} km/h</p>
                 </div>
                 <div className="detail-item">
                   <FontAwesomeIcon icon={faThermometerHalf} className="detail-icon" />
-                  <p>{weather.current.pressure_mb} hPa</p>
+                  <p>Pressure: {weather.current.pressure_mb} hPa</p>
                 </div>
               </div>
             </div>
@@ -165,53 +161,50 @@ function App() {
                 {forecast.slice(0, 3).map((day, index) => (
                   <div key={index} className="forecast-item">
                     <div className="forecast-day">{new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' })}</div>
+                    <div className="forecast-temp">{Math.round(day.day.avgtemp_c)}°C</div>
                     <img src={day.day.condition.icon} alt="Weather icon" className="forecast-icon" />
-                    <div className="forecast-temp">{Math.round(day.day.avgtemp_c)}°</div>
                     <div className="forecast-condition">{day.day.condition.text}</div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-        )}
 
-        {forecast.length > 0 && (
           <div className="weather-card hourly-forecast">
             <h2>Hourly Forecast</h2>
             <div className="hourly-grid">
-              {forecast[0].hour.map((hour, index) => (
+              {forecast[0].hour.filter((_, index) => index % 3 === 0).map((hour, index) => (
                 <div key={index} className="hourly-item">
                   <div className="hourly-time">{new Date(hour.time).getHours()}:00</div>
                   <img src={hour.condition.icon} alt="Weather icon" className="hourly-icon" />
-                  <div className="hourly-temp">{Math.round(hour.temp_c)}°</div>
+                  <div className="hourly-temp">{Math.round(hour.temp_c)}°C</div>
                 </div>
               ))}
             </div>
           </div>
-        )}
 
-        {forecast.length > 0 && (
           <div className="weather-card tenday-forecast">
             <h2>10-Day Forecast</h2>
             <div className="tenday-grid">
               {forecast.map((day, index) => (
                 <div key={index} className="tenday-item">
-                  <div className="tenday-day">{new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' })}</div>
+                  <div className="tenday-day">{new Date(day.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</div>
                   <img src={day.day.condition.icon} alt="Weather icon" className="tenday-icon" />
                   <div className="tenday-temps">
                     <span className="max-temp">{Math.round(day.day.maxtemp_c)}°</span>
                     <span className="min-temp">{Math.round(day.day.mintemp_c)}°</span>
                   </div>
+                  <div className="tenday-condition">{day.day.condition.text}</div>
                 </div>
               ))}
             </div>
           </div>
-        )}
-      </main>
+        </>
+      )}
 
-      <footer className="footer">
-        <p>&copy; 2024 WeatherNow. All rights reserved.</p>
-      </footer>
+      <button onClick={toggleTheme} className="theme-toggle">
+        <FontAwesomeIcon icon={theme === 'light' ? faMoon : faSun} />
+      </button>
     </div>
   );
 }

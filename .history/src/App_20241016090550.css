@@ -203,13 +203,12 @@ body {
 
 .forecast-item {
   text-align: center;
-  padding: 1rem;
-  border-radius: var(--border-radius);
-  transition: background-color 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .forecast-item:hover {
-  background-color: var(--accent-light);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .forecast-day {
@@ -221,11 +220,6 @@ body {
   width: 50px;
   height: 50px;
   margin: 0.5rem auto;
-  transition: transform 0.3s ease;
-}
-
-.forecast-item:hover .forecast-icon {
-  transform: scale(1.1);
 }
 
 .forecast-temp {
@@ -290,13 +284,17 @@ body {
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
   align-items: center;
-  padding: 0.75rem;
-  border-radius: var(--border-radius);
-  transition: background-color 0.3s ease;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--accent-light);
+  transition: background-color 0.2s ease;
 }
 
 .tenday-item:hover {
   background-color: var(--accent-light);
+}
+
+.tenday-item:last-child {
+  border-bottom: none;
 }
 
 .tenday-day {

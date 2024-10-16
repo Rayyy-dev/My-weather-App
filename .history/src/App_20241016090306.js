@@ -110,7 +110,7 @@ function App() {
               className="search-input"
             />
             {suggestions.length > 0 && (
-              <div className="suggestions">
+              <div className={`suggestions ${suggestions.length > 0 ? 'visible' : ''}`}>
                 {suggestions.map((suggestion, index) => (
                   <div
                     key={index}

@@ -93,13 +93,13 @@ body {
   border-radius: var(--border-radius);
   background-color: var(--card-bg);
   color: var(--primary-text);
-  transition: var(--transition);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .search-input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-light);
+  box-shadow: 0 0 0 3px rgba(91, 155, 213, 0.2);
 }
 
 .suggestions {
@@ -113,6 +113,16 @@ body {
   border-radius: 0 0 var(--border-radius) var(--border-radius);
   box-shadow: var(--shadow);
   z-index: 10;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.suggestions.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .suggestion-item {
@@ -137,6 +147,12 @@ body {
   border-radius: var(--border-radius);
   padding: 1.5rem;
   box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.weather-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .weather-card h2 {
@@ -203,13 +219,6 @@ body {
 
 .forecast-item {
   text-align: center;
-  padding: 1rem;
-  border-radius: var(--border-radius);
-  transition: background-color 0.3s ease;
-}
-
-.forecast-item:hover {
-  background-color: var(--accent-light);
 }
 
 .forecast-day {
@@ -221,11 +230,6 @@ body {
   width: 50px;
   height: 50px;
   margin: 0.5rem auto;
-  transition: transform 0.3s ease;
-}
-
-.forecast-item:hover .forecast-icon {
-  transform: scale(1.1);
 }
 
 .forecast-temp {
@@ -290,13 +294,12 @@ body {
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
   align-items: center;
-  padding: 0.75rem;
-  border-radius: var(--border-radius);
-  transition: background-color 0.3s ease;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--accent-light);
 }
 
-.tenday-item:hover {
-  background-color: var(--accent-light);
+.tenday-item:last-child {
+  border-bottom: none;
 }
 
 .tenday-day {
@@ -331,8 +334,8 @@ body {
 }
 
 .loading span {
-  animation: dots 1.4s infinite;
-  opacity: 0;
+  display: inline-block;
+  animation: pulse 1.4s ease-in-out infinite;
 }
 
 .loading span:nth-child(2) {
@@ -343,10 +346,9 @@ body {
   animation-delay: 0.4s;
 }
 
-@keyframes dots {
-  0% { opacity: 0; }
-  50% { opacity: 1; }
-  100% { opacity: 0; }
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
 }
 
 .error {
@@ -356,6 +358,12 @@ body {
   padding: 1rem;
   background-color: var(--accent-light);
   border-radius: var(--border-radius);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .footer {

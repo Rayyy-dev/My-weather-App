@@ -283,35 +283,44 @@ body {
 
 .tenday-grid {
   display: grid;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .tenday-item {
   display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
+  grid-template-columns: 2fr 1fr 4fr 1fr;
   align-items: center;
-  padding: 0.75rem;
-  border-radius: var(--border-radius);
-  transition: background-color 0.3s ease;
-}
-
-.tenday-item:hover {
-  background-color: var(--accent-light);
+  padding: 0.5rem 0;
 }
 
 .tenday-day {
   font-weight: 600;
+  color: var(--primary-text);
 }
 
 .tenday-icon {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   justify-self: center;
 }
 
-.tenday-temps {
+.tenday-temp-range {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+}
+
+.temp-bar {
+  height: 4px;
+  background-color: var(--accent-light);
+  flex-grow: 1;
+  margin: 0 0.5rem;
+  border-radius: 2px;
+}
+
+.min-temp {
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .max-temp {
@@ -319,9 +328,10 @@ body {
   font-weight: 600;
 }
 
-.min-temp {
+.precipitation {
   color: var(--accent);
-  font-weight: 600;
+  font-size: 0.9rem;
+  justify-self: end;
 }
 
 .loading {

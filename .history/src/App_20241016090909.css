@@ -9,7 +9,7 @@
   --warning: #ffb74d;
   --danger: #e57373;
   --border-radius: 10px;
-  --transition: all 0.3s ease;
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -26,7 +26,7 @@ body {
   background-color: var(--primary-bg);
   color: var(--primary-text);
   line-height: 1.6;
-  transition: var(--transition);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .app-container {
@@ -51,6 +51,7 @@ body {
   font-weight: 600;
   color: var(--accent);
   letter-spacing: -0.5px;
+  transition: var(--transition);
 }
 
 .theme-toggle {
@@ -83,6 +84,7 @@ body {
   top: 50%;
   transform: translateY(-50%);
   color: var(--secondary-text);
+  transition: var(--transition);
 }
 
 .search-input {
@@ -99,7 +101,11 @@ body {
 .search-input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-light);
+  box-shadow: 0 0 0 3px rgba(91, 155, 213, 0.2);
+}
+
+.search-input:focus + .search-icon {
+  color: var(--accent);
 }
 
 .suggestions {
@@ -113,6 +119,16 @@ body {
   border-radius: 0 0 var(--border-radius) var(--border-radius);
   box-shadow: var(--shadow);
   z-index: 10;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.suggestions.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .suggestion-item {
@@ -137,6 +153,12 @@ body {
   border-radius: var(--border-radius);
   padding: 1.5rem;
   box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.weather-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .weather-card h2 {
@@ -168,6 +190,11 @@ body {
   font-size: 3rem;
   font-weight: 700;
   line-height: 1;
+  transition: var(--transition);
+}
+
+.weather-card:hover .temperature {
+  color: var(--accent);
 }
 
 .condition {
@@ -188,6 +215,11 @@ body {
 .detail-item {
   display: flex;
   align-items: center;
+  transition: var(--transition);
+}
+
+.detail-item:hover {
+  transform: translateY(-2px);
 }
 
 .detail-icon {
@@ -205,7 +237,7 @@ body {
   text-align: center;
   padding: 1rem;
   border-radius: var(--border-radius);
-  transition: background-color 0.3s ease;
+  transition: var(--transition);
 }
 
 .forecast-item:hover {
@@ -221,7 +253,7 @@ body {
   width: 50px;
   height: 50px;
   margin: 0.5rem auto;
-  transition: transform 0.3s ease;
+  transition: var(--transition);
 }
 
 .forecast-item:hover .forecast-icon {
@@ -264,6 +296,11 @@ body {
   flex: 0 0 auto;
   text-align: center;
   min-width: 80px;
+  transition: var(--transition);
+}
+
+.hourly-item:hover {
+  transform: translateY(-2px);
 }
 
 .hourly-time {
@@ -275,6 +312,11 @@ body {
   width: 40px;
   height: 40px;
   margin: 0.5rem auto;
+  transition: var(--transition);
+}
+
+.hourly-item:hover .hourly-icon {
+  transform: scale(1.1);
 }
 
 .hourly-temp {
