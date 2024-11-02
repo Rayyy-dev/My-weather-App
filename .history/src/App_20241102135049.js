@@ -224,9 +224,7 @@ function App() {
                     />
                   </div>
                   <div className="condition">{weather.current.condition.text}</div>
-                  <div className="feels-like">
-                    Feels like {convertTemperature(weather.current.feelslike_c, unit)}°{unit}
-                  </div>
+                  <div className="feels-like">Feels like {convertTemperature(weather.current.feelslike_c, unit)}°{unit}</div>
                 </div>
                 <div className="weather-details">
                   <div className="detail-item">
@@ -316,9 +314,7 @@ function App() {
                 <div key={index} className="hourly-item">
                   <div className="hourly-time">{new Date(hour.time).getHours()}:00</div>
                   <img src={hour.condition.icon} alt="Weather icon" className="hourly-icon" />
-                  <div className="hourly-temp">
-                    {convertTemperature(hour.temp_c, unit)}°{unit}
-                  </div>
+                  <div className="hourly-temp">{Math.round(hour.temp_c)}°</div>
                 </div>
               ))}
             </div>
@@ -334,8 +330,8 @@ function App() {
                   <div className="tenday-day">{new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' })}</div>
                   <img src={day.day.condition.icon} alt="Weather icon" className="tenday-icon" />
                   <div className="tenday-temps">
-                    <span className="max-temp">{convertTemperature(day.day.maxtemp_c, unit)}°</span>
-                    <span className="min-temp">{convertTemperature(day.day.mintemp_c, unit)}°</span>
+                    <span className="max-temp">{Math.round(day.day.maxtemp_c)}°</span>
+                    <span className="min-temp">{Math.round(day.day.mintemp_c)}°</span>
                   </div>
                 </div>
               ))}

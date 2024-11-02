@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faMapMarkerAlt, faTint, faWind, faThermometerHalf, faSun, faMoon, faEye, faTachometerAlt, faCloudRain, faClock, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faMapMarkerAlt, faTint, faWind, faThermometerHalf, faSun, faMoon, faEye, faTachometerAlt, faCloudRain } from '@fortawesome/free-solid-svg-icons';
 
 const getUVStatus = (uv) => {
   if (uv <= 2) return 'Low';
@@ -28,13 +28,6 @@ const getVisibilityStatus = (visibility) => {
   return 'Good';
 };
 
-const convertTemperature = (temp, unit) => {
-  if (unit === 'F') {
-    return Math.round((temp * 9/5) + 32);
-  }
-  return Math.round(temp);
-};
-
 function App() {
   const [city, setCity] = useState('');
   const [suggestions, setSuggestions] = useState([]);
@@ -45,8 +38,6 @@ function App() {
   const [, setCities] = useState([]);
   const [theme, setTheme] = useState('light');
   const [, setAstronomy] = useState(null);
-  const [unit, setUnit] = useState('C');
-  
 
   const apiKey = "74072ad194774534b56234435241510";
   const defaultCity = 'New York';
@@ -132,25 +123,9 @@ function App() {
       <header className="header">
         <div className="logo-container">
           <h1 className="logo">WeatherNow</h1>
-          <div className="controls">
-            <div className="unit-toggle">
-              <button 
-                className={`unit-btn ${unit === 'C' ? 'active' : ''}`}
-                onClick={() => setUnit('C')}
-              >
-                °C
-              </button>
-              <button 
-                className={`unit-btn ${unit === 'F' ? 'active' : ''}`}
-                onClick={() => setUnit('F')}
-              >
-                °F
-              </button>
-            </div>
-            <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
-              <FontAwesomeIcon icon={theme === 'light' ? faMoon : faSun} />
-            </button>
-          </div>
+          <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
+            <FontAwesomeIcon icon={theme === 'light' ? faMoon : faSun} />
+          </button>
         </div>
         <div className="search-container">
           <div className="search-input-wrapper">
@@ -195,7 +170,6 @@ function App() {
               ))}
             </div>
           )}
-      
         </div>
       </header>
 
@@ -207,16 +181,11 @@ function App() {
           <div className="weather-grid">
             <div className="weather-card current">
               <h2>Current Weather</h2>
-              <div className="location-wrapper">
-                <FontAwesomeIcon icon={faMapMarkerAlt} className="location-icon" />
-                <p className="location">{weather.location.name}, {weather.location.country}</p>
-              </div>
+              <p className="location">{weather.location.name}, {weather.location.country}</p>
               <div className="weather-main">
                 <div className="temperature-container">
                   <div className="temperature-wrapper">
-                    <div className="temperature">
-                      {convertTemperature(weather.current.temp_c, unit)}°{unit}
-                    </div>
+                    <div className="temperature">{Math.round(weather.current.temp_c)}°</div>
                     <img 
                       src={weather.current.condition.icon} 
                       alt={weather.current.condition.text}
@@ -224,19 +193,29 @@ function App() {
                     />
                   </div>
                   <div className="condition">{weather.current.condition.text}</div>
-                  <div className="feels-like">
-                    Feels like {convertTemperature(weather.current.feelslike_c, unit)}°{unit}
-                  </div>
+                  <div className="feels-like">Feels like {Math.round(weather.current.feelslike_c)}°</div>
                 </div>
                 <div className="weather-details">
                   <div className="detail-item">
-                    <FontAwesomeIcon icon={faClock} className="detail-icon" />
-                    <div>
-                      <p className="detail-value">Updated {new Date(weather.current.last_updated).toLocaleTimeString('en-US', { 
+                    <div className="detail-value">
+                      {new Date(weather.current.last_updated).toLocaleTimeString('en-US', { 
                         hour: 'numeric', 
                         minute: '2-digit',
                         hour12: true 
-                      })}</p>
+                      })}
+                    </div>
+                    <div className="detail-label">Last Updated</div>
+                    <FontAwesomeIcon icon={faWind} className="detail-icon" />
+                    <div>
+                      <p className="detail-value">{Math.round(weather.current.wind_kph)} km/h</p>
+                      <p className="detail-label">Wind</p>
+                    </div>
+                  </div>
+                  <div className="detail-item">
+                    <FontAwesomeIcon icon={faThermometerHalf} className="detail-icon" />
+                    <div>
+                      <p className="detail-value">{weather.current.pressure_mb}</p>
+                      <p className="detail-label">Pressure</p>
                     </div>
                   </div>
                 </div>
@@ -316,9 +295,7 @@ function App() {
                 <div key={index} className="hourly-item">
                   <div className="hourly-time">{new Date(hour.time).getHours()}:00</div>
                   <img src={hour.condition.icon} alt="Weather icon" className="hourly-icon" />
-                  <div className="hourly-temp">
-                    {convertTemperature(hour.temp_c, unit)}°{unit}
-                  </div>
+                  <div className="hourly-temp">{Math.round(hour.temp_c)}°</div>
                 </div>
               ))}
             </div>
@@ -334,8 +311,8 @@ function App() {
                   <div className="tenday-day">{new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' })}</div>
                   <img src={day.day.condition.icon} alt="Weather icon" className="tenday-icon" />
                   <div className="tenday-temps">
-                    <span className="max-temp">{convertTemperature(day.day.maxtemp_c, unit)}°</span>
-                    <span className="min-temp">{convertTemperature(day.day.mintemp_c, unit)}°</span>
+                    <span className="max-temp">{Math.round(day.day.maxtemp_c)}°</span>
+                    <span className="min-temp">{Math.round(day.day.mintemp_c)}°</span>
                   </div>
                 </div>
               ))}
